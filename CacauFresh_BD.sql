@@ -23,7 +23,9 @@ fkCliente int
 create table registro (
 idRegistro int primary key auto_increment,
 temperatura_C float,
+alerta_temp varchar(15),
 umidade_UR float,
+alerta_umi varchar(15),
 data_hora datetime default current_timestamp,
 fkSensor int,
 estado varchar(40)
