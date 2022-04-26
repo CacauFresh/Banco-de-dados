@@ -1,20 +1,36 @@
-create table cliente (
-idCliente int primary key auto_increment,
-nome varchar(30),
-CEP char(9),
-endereco varchar(300),
-CNPJ char(18),
-telefone varchar(20),
-email varchar(50),
-senha varchar(40),
-nomeRepresentante varchar(50)
-); 
+create database cacaufresh;
+
+use cacaufresh;
+ 
+CREATE TABLE Empresa (
+  idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(30),
+  CEP CHAR(9),
+  rua VARCHAR(100),
+  CNPJ CHAR(18),
+  telefone VARCHAR(20),
+  estado CHAR(45));
+  
+  CREATE TABLE usuario (
+  idusuario INT PRIMARY KEY auto_increment,
+  nome VARCHAR(45) ,
+  email VARCHAR(100) ,
+  senha VARCHAR(20) ,
+  fkEmpresa INT ,
+  FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa));
+  
+create table setor (
+idSetor int primary key auto_increment,
+nome_setor varchar(50),
+fkEmpresa int,
+foreign key (fkEmpresa) references empresa(idEmpresa)
+);
 
 create table Sensor (
 idSensor int primary key auto_increment,
-setor varchar(50),
-fkCliente int,
-foreign key (fkCliente) references cliente(idCliente)
+sensor varchar(50),
+fkSetor int,
+foreign key (fkSetor) references setor(idSetor)
 );
 
 create table registro (
