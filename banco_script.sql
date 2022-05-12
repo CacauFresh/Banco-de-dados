@@ -42,15 +42,17 @@ data_hora datetime default current_timestamp,
 fkSensor int,
 foreign key (fkSensor) references sensor(idSensor)
 );
+
+
 insert into  empresa (nome, cep , rua, CNPJ, telefone, estado)
 VALUES ('chocotop' , '09551020' , 'rua manoel coelho 158' , '03455894658754' , '5511998765321' , 'sp'),
 		('cacaufarm' , '09754250' , 'av. goias 1020' , '05875412596548', '5511965305579' , 'sp'),
         ('cocoaking' , '09754015' , 'av.presidente kennedy 1649' , '04896578454121' , '5511963254479' , 'sp');
 
-insert into usuario (nome, email, senha)
-values  ('Fernanda Caramico' , 'fernanda@sptech.school' , 'sptech123*'),
-		('Fernando Brandao' , 'brandao@sptech.school' , 'sptech456*'),
-        ('Thiago Bonacelli' , 'thiago@sptech.school' , 'sptech789*' );
+insert into usuario (nome, email, senha, fkEmpresa)
+values  ('Fernanda Caramico' , 'fernanda@sptech.school' , 'sptech123*', 1),
+		('Fernando Brandao' , 'brandao@sptech.school' , 'sptech456*', 1),
+        ('Thiago Bonacelli' , 'thiago@sptech.school' , 'sptech789*', 2 );
 
 insert into setor (nome_setor, fkEmpresa)
 values  ('setor1' , 1),
@@ -88,3 +90,11 @@ Select * from usuario;
 Select * from setor;
 Select * from sensor;
 Select * from registro;
+
+select * from usuario as u
+	join empresa as e on u.fkEmpresa = e.idEmpresa
+	join setor as st on e.idEmpresa = st.fkEmpresa
+	join sensor as se  on st.idSetor = se.fkSetor
+    join registro as r on se.idSensor = r.fkSensor
+    where e.nome = 'chocotop';
+    
