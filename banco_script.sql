@@ -34,8 +34,8 @@ fkSetor int,
 foreign key (fkSetor) references setor(idSetor)
 );
 
-create table registro (
-idRegistro int primary key auto_increment,
+create table historico (
+idHistorico int primary key auto_increment,
 temperatura_C float,
 umidade_UR float,
 data_hora datetime default current_timestamp,
@@ -75,7 +75,7 @@ values  ('sensorA' , 1),
         ('sensorH' , 8);
         
         
-insert into registro (temperatura_C , umidade_UR, fkSensor)
+insert into historico (temperatura_C , umidade_UR, fkSensor)
 values 				(23 , 78 , 1 ),
 					(25 , 75 , 2 ),
                     (22 , 81 , 3 ),
@@ -89,12 +89,12 @@ Select * from empresa;
 Select * from usuario;
 Select * from setor;
 Select * from sensor;
-Select * from registro;
+Select * from historico;
 
 select * from usuario as u
 	join empresa as e on u.fkEmpresa = e.idEmpresa
 	join setor as st on e.idEmpresa = st.fkEmpresa
 	join sensor as se  on st.idSetor = se.fkSetor
-    join registro as r on se.idSensor = r.fkSensor
+    join historico as h on se.idSensor = r.fkSensor
     where e.nome = 'chocotop';
     
